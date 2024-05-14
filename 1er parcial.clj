@@ -1,0 +1,15 @@
+(def coordenadas '((2 2) (5 4) (1 4) (2 1) (5 1) (4 3) (3 2) (1 2)))
+(def matriz '((4 nil (HOLA) (DIEGO))
+              ((CAR GO) EN 2022 ESTA)
+              ((BE) (VE) NE LIST)
+              (1999 FE JU (TRES))
+              ((EL TROFEO) FUE DE 1979)))
+(defn extraer [C M] (if (seq? (first C))
+                      (concat (if (empty? (next C))
+                              (extraer (first C) M)
+                              (concat (extraer (first C) M) (extraer (rest C) M))))
+                      (list (let [x (nth M (- (first C) 1))] (if (symbol? x)
+                                                         x
+                                                         (nth x (- (fnext C) 1)))))))
+(extraer coordenadas matriz)
+
